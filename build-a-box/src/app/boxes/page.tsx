@@ -1,11 +1,42 @@
 import Link from "next/link";
 
-import { boxBundles, boxProducts } from "@/lib/data/boxes";
-import { kits } from "@/lib/data/kits";
+import { type BoxSize, boxProducts } from "@/lib/data/boxes";
+import { getSingleBoxKitsForSize, kits } from "@/lib/data/kits";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+
+function sumBoxesPrice(
+  boxes: { size: BoxSize; quantity: number }[],
+  priceBySize: Record<BoxSize, number>,
+) {
+  return boxes.reduce((sum, b) => sum + priceBySize[b.size] * b.quantity, 0);
+}
+
+function boxesLabel(boxes: { size: BoxSize; quantity: number }[]) {
+  return boxes.map((b) => `${b.quantity} × ${b.size}`).join(" · ");
+}
 
 export default function BoxesPage() {
+  const priceBySize = Object.fromEntries(
+    boxProducts.map((b) => [b.size, b.price]),
+  ) as Record<BoxSize, number>;
+
+  const buildBundles = kits
+    .map((kit) => ({
+      kit,
+      option: kit.requirements.reduce((best, cur) => {
+        const bestTotal = best.boxes.reduce((s, b) => s + b.quantity, 0);
+        const curTotal = cur.boxes.reduce((s, b) => s + b.quantity, 0);
+        return curTotal < bestTotal ? cur : best;
+      }, kit.requirements[0]),
+    }))
+    .filter(({ option }) => {
+      const total = option.boxes.reduce((s, b) => s + b.quantity, 0);
+      return total > 1;
+    })
+    .slice(0, 4);
+
   return (
     <div className="mx-auto max-w-6xl px-6 pt-14 md:pt-20">
       <header className="grid gap-10 md:grid-cols-12 md:items-end">
@@ -54,13 +85,28 @@ export default function BoxesPage() {
               </div>
               <p className="mt-5 font-serif text-lg">{b.name}</p>
               <p className="mt-2 text-sm text-mutedForeground">{b.description}</p>
-              <p className="mt-3 text-xs uppercase tracking-smallcaps text-mutedForeground">
-                Works with{" "}
-                {kits
-                  .filter((k) => k.sizes.includes(b.size))
-                  .map((k) => k.name)
-                  .join(", ")}
-              </p>
+              <div className="mt-4 rounded-2xl bg-muted/60 p-4 ring-1 ring-border/60">
+                <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                  From a single {b.size} box
+                </p>
+                <div className="mt-3 space-y-1 text-sm">
+                  {getSingleBoxKitsForSize(b.size).length === 0 ? (
+                    <p className="text-sm text-mutedForeground">
+                      No single-box builds for this size yet.
+                    </p>
+                  ) : (
+                    getSingleBoxKitsForSize(b.size).map((k) => (
+                      <Link
+                        key={k.id}
+                        href={`/kits/${k.slug}`}
+                        className="block text-mutedForeground transition hover:text-olive"
+                      >
+                        {k.name} →
+                      </Link>
+                    ))
+                  )}
+                </div>
+              </div>
               <div className="mt-5 flex items-center justify-between">
                 <p className="text-sm font-medium">${b.price} / box</p>
                 <AddToCartButton
@@ -84,44 +130,55 @@ export default function BoxesPage() {
               Bundles
             </p>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl">
-              Bundles for real homes
+              Bundles for building
             </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mutedForeground">
+              These bundles aren’t for moving—they’re for making. If a kit needs more than one box,
+              a bundle gives you a clean starting set (e.g. <span className="italic">3 × Medium</span> or{" "}
+              <span className="italic">2 × Large</span>).
+            </p>
           </div>
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {boxBundles.map((bundle) => (
+          {buildBundles.map(({ kit, option }) => {
+            const boxesPrice = sumBoxesPrice(option.boxes, priceBySize);
+            const bundleName = `${kit.name} — Box Bundle`;
+            const subtitle = boxesLabel(option.boxes);
+            return (
             <div
-              key={bundle.id}
+              key={`${kit.id}-${option.label}`}
               className="rounded-3xl bg-card p-6 ring-1 ring-border/60"
             >
               <div className="flex items-start justify-between gap-6">
                 <div>
-                  <p className="font-serif text-xl">{bundle.name}</p>
-                  <p className="mt-2 text-sm text-mutedForeground">{bundle.summary}</p>
+                  <p className="font-serif text-xl">{bundleName}</p>
+                  <p className="mt-2 text-sm text-mutedForeground">
+                    Includes boxes for: <span className="italic">{option.label}</span>
+                  </p>
                 </div>
-                <p className="text-sm font-medium">${bundle.price}</p>
+                <p className="text-sm font-medium">${boxesPrice}</p>
               </div>
-              <div className="mt-5 grid gap-2 text-sm text-mutedForeground sm:grid-cols-2">
-                {bundle.contents.map((c) => (
-                  <div key={`${bundle.id}-${c.size}`}>
-                    {c.size}: {c.quantity}
-                  </div>
-                ))}
-              </div>
+              <div className="mt-5 text-sm text-mutedForeground">{subtitle}</div>
               <div className="mt-6">
                 <AddToCartButton
-                  id={bundle.id}
-                  name={bundle.name}
-                  price={bundle.price}
-                  subtitle={`${bundle.contents
-                    .map((c) => `${c.quantity} ${c.size}`)
-                    .join(" · ")}`}
-                  label="Add bundle"
+                  id={`boxbundle-${kit.slug}-${option.label}`}
+                  name={bundleName}
+                  price={boxesPrice}
+                  subtitle={subtitle}
+                  label="Add box bundle"
                 />
               </div>
+              <div className="mt-6">
+                <Link
+                  href={`/kits/${kit.slug}`}
+                  className="text-sm text-mutedForeground transition hover:text-foreground"
+                >
+                  View kit details →
+                </Link>
+              </div>
             </div>
-          ))}
+          )})}
         </div>
 
         <div className="mt-12 rounded-3xl bg-muted p-6 ring-1 ring-border/60 md:p-8">
@@ -135,12 +192,9 @@ export default function BoxesPage() {
               </p>
             </div>
             <div className="md:col-span-4 md:text-right">
-              <Link
-                href="/kits"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-6 text-sm font-medium text-background transition hover:bg-foreground/90"
-              >
-                Explore build kits
-              </Link>
+              <Button asChild>
+                <Link href="/kits">Explore build kits</Link>
+              </Button>
             </div>
           </div>
         </div>

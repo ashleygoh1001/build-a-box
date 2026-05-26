@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 
 import type { KitFilter } from "@/lib/data/kits";
-import { kits } from "@/lib/data/kits";
+import { getKitRequirementsSummary, getKitSizes, kits } from "@/lib/data/kits";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { Button } from "@/components/ui/button";
 
@@ -85,19 +85,19 @@ export default function KitsPage() {
 
                 <div className="mt-5 flex items-center justify-between gap-4 text-xs uppercase tracking-smallcaps text-mutedForeground">
                   <p>
-                    {k.boxCount} · Works with {k.sizes.join(", ")}
+                    {getKitRequirementsSummary(k)} · {getKitSizes(k).join(", ")}
                   </p>
                   <AddToCartButton
                     id={k.id}
                     name={k.name}
                     price={k.price}
-                    subtitle={`${k.category} · ${k.boxCount}`}
+                    subtitle={`${k.category} · ${getKitRequirementsSummary(k)}`}
                   />
                 </div>
 
                 <Link
                   href={`/kits/${k.slug}`}
-                  className="mt-5 inline-flex text-sm text-mutedForeground transition hover:text-foreground"
+                  className="mt-5 inline-flex text-sm text-mutedForeground transition hover:text-olive"
                 >
                   View details →
                 </Link>

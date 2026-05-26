@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AnimatedSection } from "@/components/marketing/animated-section";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -8,30 +9,24 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 pt-16 md:pt-24">
         <div className="grid gap-12 md:grid-cols-12 md:items-end">
           <div className="md:col-span-7">
-            <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+            <p className="text-xs uppercase tracking-smallcaps text-olive/80">
               Moving boxes · Build kits · A second life
             </p>
             <h1 className="mt-5 font-serif text-5xl leading-[1.02] tracking-tight md:text-[5.5rem]">
               Move in.{" "}
-              <span className="italic">Build up.</span>
+              <span className="italic text-olive">Build up.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-mutedForeground">
               Build‑A‑Box makes moving boxes that become the furniture in your new
               home. Move once. Build for years.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Link
-                href="/boxes"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-6 text-sm font-medium text-background transition hover:bg-foreground/90"
-              >
-                Shop moving boxes
-              </Link>
-              <Link
-                href="/kits"
-                className="inline-flex h-11 items-center justify-center rounded-full border border-border bg-transparent px-6 text-sm font-medium text-foreground transition hover:bg-muted"
-              >
-                Explore build kits
-              </Link>
+              <Button asChild>
+                <Link href="/boxes">Shop moving boxes</Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="/kits">Explore build kits</Link>
+              </Button>
             </div>
           </div>
           <div className="md:col-span-5">
@@ -63,29 +58,48 @@ export default function Home() {
                 {
                   label: "Stage 1",
                   title: "Move",
-                  body: "Double‑wall corrugation, clean stacks, and sizing that feels considered—because calm matters on moving day.",
+                  body: "Sturdy boxes that stack clean and label quietly.",
+                  image: "[Add image: stacked boxes / move day]",
                 },
                 {
                   label: "Stage 2",
                   title: "Build",
-                  body: "Design kits translate used boxes into structure: folds, slots, and templates that make cardboard behave.",
+                  body: "Templates + folds that turn used board into parts.",
+                  image: "[Add image: templates / folds / joinery]",
                 },
                 {
                   label: "Stage 3",
                   title: "Live",
-                  body: "Furniture and decor that lasts through the settling‑in. When it’s done, it returns to paper—honestly.",
+                  body: "A calm object you keep—then recycle cleanly.",
+                  image: "[Add image: finished furniture in home]",
                 },
               ].map((s) => (
                 <div key={s.title} className="rounded-3xl bg-card p-6 ring-1 ring-border/60">
-                  <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-                    {s.label}
-                  </p>
-                  <p className="mt-4 font-serif text-xl">{s.title}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-mutedForeground">
-                    {s.body}
-                  </p>
+                  <div className="rounded-2xl bg-muted/60 p-4 ring-1 ring-border/60">
+                    <div className="aspect-[3/2] w-full rounded-xl bg-background/70 p-4 ring-1 ring-border/60">
+                      <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                        {s.image}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-5 flex items-baseline justify-between gap-4">
+                    <p className="font-serif text-xl">{s.title}</p>
+                    <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                      {s.label}
+                    </p>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-mutedForeground">{s.body}</p>
                 </div>
               ))}
+            </div>
+            <div className="mt-5 hidden items-center justify-between px-2 text-xs uppercase tracking-smallcaps text-mutedForeground md:flex">
+              <span>Move</span>
+              <span className="text-olive/70">→</span>
+              <span>Build</span>
+              <span className="text-olive/70">→</span>
+              <span>Live</span>
+              <span className="text-olive/70">→</span>
+              <span>Recycle</span>
             </div>
           </div>
         </div>
@@ -100,7 +114,7 @@ export default function Home() {
             </p>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl">Featured kits</h2>
           </div>
-          <Link href="/kits" className="text-sm text-mutedForeground hover:text-foreground">
+          <Link href="/kits" className="text-sm text-mutedForeground hover:text-olive">
             View all kits
           </Link>
         </div>

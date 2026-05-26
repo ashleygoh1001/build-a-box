@@ -25,17 +25,17 @@ export function SiteFooter() {
             </p>
             <ul className="mt-4 space-y-2 text-sm">
               <li>
-                <Link href="/boxes" className="transition hover:text-foreground">
+                <Link href="/boxes" className="transition hover:text-olive">
                   Boxes
                 </Link>
               </li>
               <li>
-                <Link href="/kits" className="transition hover:text-foreground">
+                <Link href="/kits" className="transition hover:text-olive">
                   Kits
                 </Link>
               </li>
               <li>
-                <Link href="/story" className="transition hover:text-foreground">
+                <Link href="/story" className="transition hover:text-olive">
                   Our Story
                 </Link>
               </li>

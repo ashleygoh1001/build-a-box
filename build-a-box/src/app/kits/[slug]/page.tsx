@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 
-import { getKitBySlug, kits } from "@/lib/data/kits";
+import {
+  getKitBySlug,
+  getKitRequirementsSummary,
+  getKitSizes,
+  kits,
+} from "@/lib/data/kits";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -79,7 +84,7 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
           <div className="mt-7 flex items-center justify-between">
             <p className="text-lg font-medium">${kit.price}</p>
             <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-              {kit.boxCount} · Works with {kit.sizes.join(", ")} boxes
+              {getKitRequirementsSummary(kit)} · {getKitSizes(kit).join(", ")} boxes
             </p>
           </div>
 
@@ -88,7 +93,7 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
               id={kit.id}
               name={kit.name}
               price={kit.price}
-              subtitle={`${kit.category} · ${kit.boxCount}`}
+              subtitle={`${kit.category} · ${getKitRequirementsSummary(kit)}`}
               label="Add to Cart"
             />
           </div>
@@ -153,7 +158,9 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
               </div>
               <div className="p-6">
                 <p className="font-serif text-lg">{k.name}</p>
-                <p className="mt-2 text-sm text-mutedForeground">{k.boxCount}</p>
+                <p className="mt-2 text-sm text-mutedForeground">
+                  {getKitRequirementsSummary(k)}
+                </p>
                 <p className="mt-4 text-sm font-medium">${k.price}</p>
               </div>
             </div>

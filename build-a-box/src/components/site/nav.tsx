@@ -34,7 +34,10 @@ export function SiteNav() {
     >
       <div className={cn(scrolled && "hairline")} />
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link href="/" className="font-serif text-lg tracking-tight">
+        <Link
+          href="/"
+          className="font-serif text-lg tracking-tight transition hover:text-olive"
+        >
           Build‑A‑Box
         </Link>
 
@@ -43,7 +46,7 @@ export function SiteNav() {
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm text-mutedForeground transition hover:text-foreground"
+              className="text-sm text-mutedForeground transition hover:text-olive"
             >
               {l.label}
             </Link>

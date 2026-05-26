@@ -3,14 +3,21 @@ import type { BoxSize } from "./boxes";
 export type KitCategory = "Starter" | "Statement" | "Decor";
 export type KitFilter = "All" | "Starter" | "Statement" | "Decor";
 
+export type BoxRequirement = { size: BoxSize; quantity: number };
+
+export type KitRequirementOption = {
+  /** Human-readable alternative, e.g. "3 × Medium" or "2 × Large" */
+  label: string;
+  boxes: BoxRequirement[];
+};
+
 export type KitProduct = {
   id: string;
   slug: string;
   name: string;
   category: KitCategory;
   price: number;
-  boxCount: string;
-  sizes: BoxSize[];
+  requirements: KitRequirementOption[];
   shortDescription: string;
   imageCaption: string;
 };
@@ -23,8 +30,10 @@ export const kits: KitProduct[] = [
     name: "Side Table Kit",
     category: "Starter",
     price: 38,
-    boxCount: "2–3 boxes",
-    sizes: ["Medium", "Large"],
+    requirements: [
+      { label: "1 × Large", boxes: [{ size: "Large", quantity: 1 }] },
+      { label: "2 × Medium", boxes: [{ size: "Medium", quantity: 2 }] },
+    ],
     shortDescription: "A quiet surface for a book and a glass of water.",
     imageCaption: "[Kit: Cardboard side table beside linen sofa]",
   },
@@ -34,8 +43,10 @@ export const kits: KitProduct[] = [
     name: "Floor Lamp Kit",
     category: "Starter",
     price: 46,
-    boxCount: "3–4 boxes",
-    sizes: ["Medium", "Large"],
+    requirements: [
+      { label: "2 × Large", boxes: [{ size: "Large", quantity: 2 }] },
+      { label: "3 × Medium", boxes: [{ size: "Medium", quantity: 3 }] },
+    ],
     shortDescription: "Light, softened. A paper-like glow from reused board.",
     imageCaption: "[Kit: Cardboard floor lamp in corner of calm room]",
   },
@@ -45,8 +56,7 @@ export const kits: KitProduct[] = [
     name: "Bookend Set",
     category: "Starter",
     price: 22,
-    boxCount: "1–2 boxes",
-    sizes: ["Small"],
+    requirements: [{ label: "1 × Small", boxes: [{ size: "Small", quantity: 1 }] }],
     shortDescription: "Two forms, one material. Holds weight with ease.",
     imageCaption: "[Kit: Minimal cardboard bookends on shelf]",
   },
@@ -56,8 +66,10 @@ export const kits: KitProduct[] = [
     name: "Planter Stand",
     category: "Starter",
     price: 28,
-    boxCount: "1–2 boxes",
-    sizes: ["Small", "Medium"],
+    requirements: [
+      { label: "1 × Medium", boxes: [{ size: "Medium", quantity: 1 }] },
+      { label: "1 × Small", boxes: [{ size: "Small", quantity: 1 }] },
+    ],
     shortDescription: "A small lift for green things and morning light.",
     imageCaption: "[Kit: Cardboard planter stand near window]",
   },
@@ -69,8 +81,10 @@ export const kits: KitProduct[] = [
     name: "Lounge Chair Kit",
     category: "Statement",
     price: 128,
-    boxCount: "8–10 boxes",
-    sizes: ["Large", "Extra Large"],
+    requirements: [
+      { label: "2 × Extra Large", boxes: [{ size: "Extra Large", quantity: 2 }] },
+      { label: "3 × Large", boxes: [{ size: "Large", quantity: 3 }] },
+    ],
     shortDescription: "Surprisingly structural. Designed to be lived with.",
     imageCaption: "[Hero: Cardboard lounge chair in sunlit room]",
   },
@@ -80,8 +94,11 @@ export const kits: KitProduct[] = [
     name: "Bookshelf Kit",
     category: "Statement",
     price: 144,
-    boxCount: "10–12 boxes",
-    sizes: ["Medium", "Large", "Extra Large"],
+    requirements: [
+      { label: "4 × Large", boxes: [{ size: "Large", quantity: 4 }] },
+      { label: "6 × Medium", boxes: [{ size: "Medium", quantity: 6 }] },
+      { label: "2 × Extra Large", boxes: [{ size: "Extra Large", quantity: 2 }] },
+    ],
     shortDescription: "A grid of calm. Slots, folds, and quiet strength.",
     imageCaption: "[Kit: Cardboard bookshelf with ceramics and books]",
   },
@@ -91,8 +108,10 @@ export const kits: KitProduct[] = [
     name: "Bench Kit",
     category: "Statement",
     price: 98,
-    boxCount: "6–8 boxes",
-    sizes: ["Medium", "Large"],
+    requirements: [
+      { label: "2 × Large", boxes: [{ size: "Large", quantity: 2 }] },
+      { label: "3 × Medium", boxes: [{ size: "Medium", quantity: 3 }] },
+    ],
     shortDescription: "For entryways, the end of beds, and pauses.",
     imageCaption: "[Kit: Cardboard bench with folded blanket]",
   },
@@ -102,8 +121,10 @@ export const kits: KitProduct[] = [
     name: "Desk Kit",
     category: "Statement",
     price: 158,
-    boxCount: "10–12 boxes",
-    sizes: ["Large", "Extra Large"],
+    requirements: [
+      { label: "3 × Extra Large", boxes: [{ size: "Extra Large", quantity: 3 }] },
+      { label: "4 × Large", boxes: [{ size: "Large", quantity: 4 }] },
+    ],
     shortDescription: "A work surface that begins with what you already have.",
     imageCaption: "[Kit: Cardboard desk with notebook and lamp]",
   },
@@ -115,8 +136,10 @@ export const kits: KitProduct[] = [
     name: "Pendant Chandelier",
     category: "Decor",
     price: 64,
-    boxCount: "3–4 boxes",
-    sizes: ["Medium", "Large"],
+    requirements: [
+      { label: "1 × Medium", boxes: [{ size: "Medium", quantity: 1 }] },
+      { label: "1 × Large", boxes: [{ size: "Large", quantity: 1 }] },
+    ],
     shortDescription: "Layered petals of board. Shadow, warmth, presence.",
     imageCaption: "[Kit: Cardboard pendant chandelier over dining table]",
   },
@@ -126,8 +149,11 @@ export const kits: KitProduct[] = [
     name: "Wall Sculpture",
     category: "Decor",
     price: 58,
-    boxCount: "2–3 boxes",
-    sizes: ["Small", "Medium"],
+    requirements: [
+      { label: "1 × Small", boxes: [{ size: "Small", quantity: 1 }] },
+      { label: "2 × Small", boxes: [{ size: "Small", quantity: 2 }] },
+      { label: "1 × Medium", boxes: [{ size: "Medium", quantity: 1 }] },
+    ],
     shortDescription: "A relief of repeating forms—soft, tactile geometry.",
     imageCaption: "[Kit: Cardboard wall sculpture in hallway]",
   },
@@ -137,8 +163,10 @@ export const kits: KitProduct[] = [
     name: "Room Divider",
     category: "Decor",
     price: 110,
-    boxCount: "7–9 boxes",
-    sizes: ["Large", "Extra Large"],
+    requirements: [
+      { label: "2 × Extra Large", boxes: [{ size: "Extra Large", quantity: 2 }] },
+      { label: "3 × Large", boxes: [{ size: "Large", quantity: 3 }] },
+    ],
     shortDescription: "A movable boundary. Light passes through; life continues.",
     imageCaption: "[Kit: Cardboard room divider in studio apartment]",
   },
@@ -150,7 +178,26 @@ export function getKitBySlug(slug: string) {
   return kits.find((k) => k.slug === slug);
 }
 
-export function getKitsForSize(size: BoxSize) {
-  return kits.filter((k) => k.sizes.includes(size));
+export function getKitSizes(kit: KitProduct): BoxSize[] {
+  return Array.from(
+    new Set(kit.requirements.flatMap((opt) => opt.boxes.map((b) => b.size))),
+  );
+}
+
+export function getKitRequirementsSummary(kit: KitProduct) {
+  return kit.requirements.map((o) => o.label).join(" or ");
+}
+
+export function isSingleBoxKitForSize(kit: KitProduct, size: BoxSize) {
+  return kit.requirements.some(
+    (opt) =>
+      opt.boxes.length === 1 &&
+      opt.boxes[0]?.size === size &&
+      opt.boxes[0]?.quantity === 1,
+  );
+}
+
+export function getSingleBoxKitsForSize(size: BoxSize) {
+  return kits.filter((k) => isSingleBoxKitForSize(k, size));
 }
 
