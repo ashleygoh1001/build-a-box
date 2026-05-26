@@ -1,3 +1,5 @@
+import type { BoxSize } from "./boxes";
+
 export type KitCategory = "Starter" | "Statement" | "Decor";
 export type KitFilter = "All" | "Starter" | "Statement" | "Decor";
 
@@ -8,6 +10,7 @@ export type KitProduct = {
   category: KitCategory;
   price: number;
   boxCount: string;
+  sizes: BoxSize[];
   shortDescription: string;
   imageCaption: string;
 };
@@ -21,6 +24,7 @@ export const kits: KitProduct[] = [
     category: "Starter",
     price: 38,
     boxCount: "2–3 boxes",
+    sizes: ["Medium", "Large"],
     shortDescription: "A quiet surface for a book and a glass of water.",
     imageCaption: "[Kit: Cardboard side table beside linen sofa]",
   },
@@ -31,6 +35,7 @@ export const kits: KitProduct[] = [
     category: "Starter",
     price: 46,
     boxCount: "3–4 boxes",
+    sizes: ["Medium", "Large"],
     shortDescription: "Light, softened. A paper-like glow from reused board.",
     imageCaption: "[Kit: Cardboard floor lamp in corner of calm room]",
   },
@@ -41,6 +46,7 @@ export const kits: KitProduct[] = [
     category: "Starter",
     price: 22,
     boxCount: "1–2 boxes",
+    sizes: ["Small"],
     shortDescription: "Two forms, one material. Holds weight with ease.",
     imageCaption: "[Kit: Minimal cardboard bookends on shelf]",
   },
@@ -51,6 +57,7 @@ export const kits: KitProduct[] = [
     category: "Starter",
     price: 28,
     boxCount: "1–2 boxes",
+    sizes: ["Small", "Medium"],
     shortDescription: "A small lift for green things and morning light.",
     imageCaption: "[Kit: Cardboard planter stand near window]",
   },
@@ -63,6 +70,7 @@ export const kits: KitProduct[] = [
     category: "Statement",
     price: 128,
     boxCount: "8–10 boxes",
+    sizes: ["Large", "Extra Large"],
     shortDescription: "Surprisingly structural. Designed to be lived with.",
     imageCaption: "[Hero: Cardboard lounge chair in sunlit room]",
   },
@@ -73,6 +81,7 @@ export const kits: KitProduct[] = [
     category: "Statement",
     price: 144,
     boxCount: "10–12 boxes",
+    sizes: ["Medium", "Large", "Extra Large"],
     shortDescription: "A grid of calm. Slots, folds, and quiet strength.",
     imageCaption: "[Kit: Cardboard bookshelf with ceramics and books]",
   },
@@ -83,6 +92,7 @@ export const kits: KitProduct[] = [
     category: "Statement",
     price: 98,
     boxCount: "6–8 boxes",
+    sizes: ["Medium", "Large"],
     shortDescription: "For entryways, the end of beds, and pauses.",
     imageCaption: "[Kit: Cardboard bench with folded blanket]",
   },
@@ -93,6 +103,7 @@ export const kits: KitProduct[] = [
     category: "Statement",
     price: 158,
     boxCount: "10–12 boxes",
+    sizes: ["Large", "Extra Large"],
     shortDescription: "A work surface that begins with what you already have.",
     imageCaption: "[Kit: Cardboard desk with notebook and lamp]",
   },
@@ -105,6 +116,7 @@ export const kits: KitProduct[] = [
     category: "Decor",
     price: 64,
     boxCount: "3–4 boxes",
+    sizes: ["Medium", "Large"],
     shortDescription: "Layered petals of board. Shadow, warmth, presence.",
     imageCaption: "[Kit: Cardboard pendant chandelier over dining table]",
   },
@@ -115,6 +127,7 @@ export const kits: KitProduct[] = [
     category: "Decor",
     price: 58,
     boxCount: "2–3 boxes",
+    sizes: ["Small", "Medium"],
     shortDescription: "A relief of repeating forms—soft, tactile geometry.",
     imageCaption: "[Kit: Cardboard wall sculpture in hallway]",
   },
@@ -125,6 +138,7 @@ export const kits: KitProduct[] = [
     category: "Decor",
     price: 110,
     boxCount: "7–9 boxes",
+    sizes: ["Large", "Extra Large"],
     shortDescription: "A movable boundary. Light passes through; life continues.",
     imageCaption: "[Kit: Cardboard room divider in studio apartment]",
   },
@@ -134,5 +148,9 @@ export const featuredKitSlugs = ["lounge-chair", "side-table", "bookshelf", "pen
 
 export function getKitBySlug(slug: string) {
   return kits.find((k) => k.slug === slug);
+}
+
+export function getKitsForSize(size: BoxSize) {
+  return kits.filter((k) => k.sizes.includes(size));
 }
 

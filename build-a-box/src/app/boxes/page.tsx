@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { boxBundles, boxProducts } from "@/lib/data/boxes";
+import { kits } from "@/lib/data/kits";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { Separator } from "@/components/ui/separator";
 
@@ -53,6 +54,13 @@ export default function BoxesPage() {
               </div>
               <p className="mt-5 font-serif text-lg">{b.name}</p>
               <p className="mt-2 text-sm text-mutedForeground">{b.description}</p>
+              <p className="mt-3 text-xs uppercase tracking-smallcaps text-mutedForeground">
+                Works with{" "}
+                {kits
+                  .filter((k) => k.sizes.includes(b.size))
+                  .map((k) => k.name)
+                  .join(", ")}
+              </p>
               <div className="mt-5 flex items-center justify-between">
                 <p className="text-sm font-medium">${b.price} / box</p>
                 <AddToCartButton

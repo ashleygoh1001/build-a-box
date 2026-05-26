@@ -9,9 +9,6 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
   const kit = getKitBySlug(params.slug);
   if (!kit) return notFound();
 
-  // Per spec: fully detailed example only for Lounge Chair.
-  if (kit.slug !== "lounge-chair") return notFound();
-
   const related = kits.filter((k) => k.slug !== kit.slug).slice(0, 3);
 
   return (
@@ -75,14 +72,14 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
           </p>
           <h1 className="mt-4 font-serif text-4xl leading-tight">{kit.name}</h1>
           <p className="mt-5 text-sm leading-relaxed text-mutedForeground">
-            A structural lounge chair made from your moved-with boxes—designed to
-            feel calm, deliberate, and surprisingly enduring.
+            A structural piece made from your moved‑with boxes—designed to feel calm,
+            deliberate, and surprisingly enduring.
           </p>
 
           <div className="mt-7 flex items-center justify-between">
             <p className="text-lg font-medium">${kit.price}</p>
             <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-              {kit.boxCount}
+              {kit.boxCount} · Works with {kit.sizes.join(", ")} boxes
             </p>
           </div>
 
@@ -109,7 +106,7 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
               <li>Laser-cut template sheets (for consistent folds)</li>
               <li>Low-profile connectors (paper-first, no plastic bulk)</li>
               <li>Assembly guide with joinery map</li>
-              <li>Finishing instructions (optional wax + edge sanding)</li>
+              <li>Finishing suggestions (edge softening, optional wax)</li>
             </ul>
           </details>
 

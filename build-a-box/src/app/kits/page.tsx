@@ -83,9 +83,9 @@ export default function KitsPage() {
                   <p className="text-sm font-medium">${k.price}</p>
                 </div>
 
-                <div className="mt-5 flex items-center justify-between gap-4">
-                  <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-                    {k.boxCount}
+                <div className="mt-5 flex items-center justify-between gap-4 text-xs uppercase tracking-smallcaps text-mutedForeground">
+                  <p>
+                    {k.boxCount} · Works with {k.sizes.join(", ")}
                   </p>
                   <AddToCartButton
                     id={k.id}
