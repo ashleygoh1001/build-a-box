@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Palette */
+  --background: 250 248 244; /* #FAF8F4 */
+  --foreground: 28 28 26; /* #1C1C1A */
+  --card: 246 243 237;
+  --muted: 240 235 226;
+  --muted-foreground: 95 92 86;
+  --accent: 201 168 117; /* #C9A875 */
+  --accent-foreground: 28 28 26;
+  --olive: 61 74 42; /* #3D4A2A */
+  --border: 220 214 203;
+  --ring: 201 168 117;
+}
+
+html {
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+}
+
+body {
+  @apply font-sans antialiased;
+  background: rgb(var(--background));
+  color: rgb(var(--foreground));
+}
+
+.prose p {
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+.hairline {
+  height: 1px;
+  background: rgb(var(--border));
+}
