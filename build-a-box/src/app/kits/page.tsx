@@ -41,6 +41,11 @@ export default function KitsPage() {
               while your home becomes yours.
             </p>
           </div>
+          <div className="mt-7 flex flex-wrap gap-2 text-mutedForeground">
+            <span className="stamp">templates</span>
+            <span className="stamp">connectors</span>
+            <span className="stamp">instructions</span>
+          </div>
         </div>
         <div className="md:col-span-5">
           <div className="rounded-3xl bg-muted p-6 ring-1 ring-border/60">

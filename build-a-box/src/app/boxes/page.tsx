@@ -18,6 +18,8 @@ function boxesLabel(boxes: { size: BoxSize; quantity: number }[]) {
   return boxes.map((b) => `${b.quantity} × ${b.size}`).join(" · ");
 }
 
+const getAspectRatio = (aspect?: string) => (aspect ? aspect.replace("/", " / ") : "4 / 3");
+
 export default function BoxesPage() {
   const priceBySize = Object.fromEntries(
     boxProducts.map((b) => [b.size, b.price]),
@@ -87,11 +89,27 @@ export default function BoxesPage() {
               key={b.id}
               className="rounded-3xl bg-card p-6 ring-1 ring-border/60 transition hover:-translate-y-0.5 hover:shadow-soft"
             >
-              <div className="aspect-[4/3] rounded-2xl bg-muted p-4">
-                <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-                  [Box: {b.size} — {b.dimensions}]
-                </p>
-              </div>
+              {b.imageSrc ? (
+                <div
+                  style={{ aspectRatio: getAspectRatio(b.imageAspect) }}
+                  className="w-full overflow-hidden rounded-2xl bg-muted p-4 ring-1 ring-border/60"
+                >
+                  <Image
+                    src={b.imageSrc}
+                    alt={b.imageAlt ?? ""}
+                    width={1200}
+                    height={700}
+                    sizes="(min-width: 1024px) 23vw, (min-width: 768px) 45vw, 100vw"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="aspect-[4/3] rounded-2xl bg-muted p-4">
+                  <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                    [Box: {b.size} — {b.dimensions}]
+                  </p>
+                </div>
+              )}
               <p className="mt-5 font-serif text-lg">{b.name}</p>
               <p className="mt-2 text-sm text-mutedForeground">{b.description}</p>
               <div className="mt-4 rounded-2xl bg-muted/60 p-4 ring-1 ring-border/60">

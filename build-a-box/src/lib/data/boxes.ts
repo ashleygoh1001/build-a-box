@@ -7,6 +7,10 @@ export type BoxProduct = {
   dimensions: string;
   price: number;
   description: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  /** Tailwind-like aspect ratio value, e.g. "1024/575" */
+  imageAspect?: string;
 };
 
 export const boxProducts: BoxProduct[] = [
@@ -18,6 +22,9 @@ export const boxProducts: BoxProduct[] = [
     price: 4.0,
     description:
       "For books, pantry jars, and the small pieces that add up. Crisp corners. Clean stack.",
+    imageSrc: "/box-small.png",
+    imageAlt: "Small moving box with cut and fold guidelines",
+    imageAspect: "1024/575",
   },
   {
     id: "box-medium",
@@ -27,6 +34,9 @@ export const boxProducts: BoxProduct[] = [
     price: 7.0,
     description:
       "A steady default for linens and everyday objects. Double-wall corrugation where it matters.",
+    imageSrc: "/box-medium.png",
+    imageAlt: "Medium moving box with printed instructions",
+    imageAspect: "1024/575",
   },
   {
     id: "box-large",
@@ -36,6 +46,9 @@ export const boxProducts: BoxProduct[] = [
     price: 10.0,
     description:
       "For awkward shapes and gentle bulk—lamps, appliances, the things you carry with two hands.",
+    imageSrc: "/box-large.png",
+    imageAlt: "Large moving box with cut and fold lines",
+    imageAspect: "1024/575",
   },
   {
     id: "box-xl",
@@ -45,6 +58,9 @@ export const boxProducts: BoxProduct[] = [
     price: 13.0,
     description:
       "Big panels for statement builds and wide surfaces. The one you keep after the move.",
+    imageSrc: "/box-xl.png",
+    imageAlt: "Extra large moving box with printed build diagram",
+    imageAspect: "1024/575",
   },
 ];
 

@@ -24,6 +24,12 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
       <div className="grid gap-10 md:grid-cols-12 md:items-start">
         <div className="md:col-span-7">
           <div className="rounded-3xl bg-muted p-6 ring-1 ring-border/60">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+              <span className="stamp">{kit.category.toLowerCase()}</span>
+              <span className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                {getKitRequirementsSummary(kit)} · {getKitSizes(kit).join(", ")}
+              </span>
+            </div>
             {kit.imageSrc ? (
               <div
                 style={{ aspectRatio: getAspectRatio(kit.imageAspect) }}
