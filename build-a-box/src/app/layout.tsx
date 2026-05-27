@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart/cart-context";
 import { SiteNav } from "@/components/site/nav";
 import { SiteFooter } from "@/components/site/footer";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { SmoothScroll } from "@/components/ux/smooth-scroll";
+import { Cursor } from "@/components/ux/cursor";
 
 const fontSerif = Fraunces({
   subsets: ["latin"],
@@ -15,6 +17,12 @@ const fontSerif = Fraunces({
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const fontDisplay = Inter_Tight({
+  subsets: ["latin"],
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -30,13 +38,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fontSerif.variable} ${fontSans.variable}`}>
+    <html
+      lang="en"
+      className={`${fontSerif.variable} ${fontSans.variable} ${fontDisplay.variable}`}
+    >
       <body className="min-h-screen paper-bg">
         <CartProvider>
           <SiteNav />
-          <main>{children}</main>
+          <SmoothScroll>
+            <main>{children}</main>
+          </SmoothScroll>
           <SiteFooter />
           <CartDrawer />
+          <Cursor />
         </CartProvider>
       </body>
     </html>

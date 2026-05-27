@@ -24,6 +24,7 @@ const config: Config = {
       fontFamily: {
         serif: ["var(--font-serif)", "ui-serif", "Georgia", "serif"],
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         smallcaps: "0.14em",
