@@ -39,7 +39,9 @@ const sections = [
     label: "What’s next",
     title: "Design kits as a library, not a trend.",
     body: "We want kits to feel like references you return to—forms that sit comfortably beside real furniture. Chairs. Shelves. Light. Small dividers. The goal is a home that gets better without getting heavier.",
-    image: "[Image: kit components organized in trays]",
+    imageSrc: "/story-kit-trays.png",
+    imageAlt: "Kit components organized in trays",
+    imageAspect: "1024/575",
   },
 ];
 
