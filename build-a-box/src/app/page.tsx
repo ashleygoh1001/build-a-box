@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { AnimatedSection } from "@/components/marketing/animated-section";
 import { Button } from "@/components/ui/button";
 
@@ -6,9 +7,9 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 pt-16 md:pt-24">
+      <section className="mx-auto max-w-7xl px-6 pt-16 md:pt-24">
         <div className="grid gap-12 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-7">
+          <div className="md:col-span-6">
             <p className="text-xs uppercase tracking-smallcaps text-olive/80">
               Moving boxes · Build kits · A second life
             </p>
@@ -29,13 +30,17 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="md:col-span-5">
-            <div className="aspect-[4/5] rounded-3xl bg-muted p-6 ring-1 ring-border/60">
-              <div className="flex h-full flex-col justify-end">
-                <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-                  [Hero: Cardboard lounge chair in sunlit room]
-                </p>
-              </div>
+          <div className="md:col-span-6">
+            <div className="overflow-hidden rounded-3xl bg-muted ring-1 ring-border/60">
+              <Image
+                src="/hero-chair.png"
+                alt="Cardboard lounge chair in a sunlit room"
+                priority
+                width={1200}
+                height={1500}
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="h-auto w-full object-contain"
+              />
             </div>
           </div>
         </div>
@@ -59,27 +64,43 @@ export default function Home() {
                   label: "Stage 1",
                   title: "Move",
                   body: "Sturdy boxes that stack clean and label quietly.",
-                  image: "[Add image: stacked boxes / move day]",
+                  imageSrc: "/stage-move.png",
+                  imageAlt: "Stacked moving boxes labeled by room",
                 },
                 {
                   label: "Stage 2",
                   title: "Build",
                   body: "Templates + folds that turn used board into parts.",
-                  image: "[Add image: templates / folds / joinery]",
+                  imageSrc: "/stage-build.png",
+                  imageAlt: "Hand tracing a cardboard template for building",
                 },
                 {
                   label: "Stage 3",
                   title: "Live",
                   body: "A calm object you keep—then recycle cleanly.",
-                  image: "[Add image: finished furniture in home]",
+                  imageSrc: "/stage-live.png",
+                  imageAlt: "Cardboard lounge chair in a sunlit room",
                 },
               ].map((s) => (
                 <div key={s.title} className="rounded-3xl bg-card p-6 ring-1 ring-border/60">
                   <div className="rounded-2xl bg-muted/60 p-4 ring-1 ring-border/60">
-                    <div className="aspect-[3/2] w-full rounded-xl bg-background/70 p-4 ring-1 ring-border/60">
-                      <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-                        {s.image}
-                      </p>
+                    <div className="aspect-[1024/558] w-full overflow-hidden rounded-xl bg-background/70 ring-1 ring-border/60">
+                      {s.imageSrc ? (
+                        <Image
+                          src={s.imageSrc}
+                          alt={s.imageAlt ?? ""}
+                          width={1200}
+                          height={800}
+                          sizes="(min-width: 768px) 25vw, 100vw"
+                          className="h-full w-full object-contain"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-end p-4">
+                          <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                            {s.imageText}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="mt-5 flex items-baseline justify-between gap-4">
@@ -124,25 +145,29 @@ export default function Home() {
             {
               name: "Lounge Chair Kit",
               meta: "8–10 boxes · $128",
-              caption: "[Kit: Lounge chair in quiet apartment]",
+              imageSrc: "/kit-lounge-chair.png",
+              imageAlt: "Lounge chair kit in a sunlit apartment",
               href: "/kits/lounge-chair",
             },
             {
               name: "Side Table Kit",
               meta: "2–3 boxes · $38",
-              caption: "[Kit: Side table beside linen sofa]",
+              imageSrc: "/kit-side-table.png",
+              imageAlt: "Side table kit beside a sofa in warm light",
               href: "/kits/side-table",
             },
             {
               name: "Bookshelf Kit",
               meta: "10–12 boxes · $144",
-              caption: "[Kit: Bookshelf with ceramics and books]",
+              imageSrc: "/kit-bookshelf.png",
+              imageAlt: "Bookshelf kit styled with books and ceramics",
               href: "/kits/bookshelf",
             },
             {
               name: "Pendant Chandelier",
               meta: "3–4 boxes · $64",
-              caption: "[Kit: Pendant chandelier over dining table]",
+              imageSrc: "/kit-pendant-chandelier.png",
+              imageAlt: "Pendant chandelier kit over a dining table",
               href: "/kits/pendant-chandelier",
             },
           ].map((k) => (
@@ -151,10 +176,23 @@ export default function Home() {
               href={k.href}
               className="group rounded-3xl bg-card ring-1 ring-border/60 transition hover:-translate-y-0.5 hover:shadow-soft"
             >
-              <div className="aspect-[4/3] rounded-t-3xl bg-muted p-5">
-                <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-                  {k.caption}
-                </p>
+              <div className="rounded-t-3xl bg-muted p-5">
+                {k.imageSrc ? (
+                  <div className="aspect-[1024/559] w-full overflow-hidden rounded-2xl bg-background/70 ring-1 ring-border/60">
+                    <Image
+                      src={k.imageSrc}
+                      alt={k.imageAlt ?? ""}
+                      width={1200}
+                      height={700}
+                      sizes="(min-width: 1024px) 23vw, (min-width: 768px) 45vw, 100vw"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                ) : (
+                  <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                    {k.caption}
+                  </p>
+                )}
               </div>
               <div className="p-6">
                 <p className="font-serif text-lg">{k.name}</p>

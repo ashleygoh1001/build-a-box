@@ -29,11 +29,11 @@ export function SiteNav() {
     <header
       className={cn(
         "sticky top-0 z-40 transition-colors",
-        scrolled ? "bg-background/90 backdrop-blur-md" : "bg-transparent",
+        scrolled ? "bg-background/85 backdrop-blur-md" : "bg-transparent",
       )}
     >
       <div className={cn(scrolled && "hairline")} />
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Link
           href="/"
           className="font-serif text-lg tracking-tight transition hover:text-olive"

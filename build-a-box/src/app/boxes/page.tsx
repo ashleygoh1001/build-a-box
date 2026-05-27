@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { type BoxSize, boxProducts } from "@/lib/data/boxes";
 import { getSingleBoxKitsForSize, kits } from "@/lib/data/kits";
@@ -55,9 +56,17 @@ export default function BoxesPage() {
         </div>
         <div className="md:col-span-5">
           <div className="rounded-3xl bg-muted p-6 ring-1 ring-border/60">
-            <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-              [Image: neatly stacked boxes with subtle labeling]
-            </p>
+            <div className="aspect-[1024/559] w-full overflow-hidden rounded-2xl bg-background/70 ring-1 ring-border/60">
+              <Image
+                src="/boxes-stacked.png"
+                alt="Neatly stacked boxes with subtle labeling"
+                width={1200}
+                height={700}
+                priority
+                sizes="(min-width: 768px) 40vw, 100vw"
+                className="h-full w-full object-contain"
+              />
+            </div>
           </div>
         </div>
       </header>

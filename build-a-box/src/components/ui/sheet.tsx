@@ -28,7 +28,7 @@ type SheetSide = "right";
 
 const sheetVariants: Record<SheetSide, string> = {
   right:
-    "fixed inset-y-0 right-0 z-50 h-full w-full bg-card p-6 shadow-soft ring-1 ring-border/60 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:w-[420px] sm:max-w-md",
+    "fixed inset-y-0 right-0 z-50 h-full w-full bg-card p-6 shadow-[0_28px_80px_rgba(28,28,26,0.16)] ring-1 ring-border/70 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:w-[420px] sm:max-w-md",
 };
 
 const SheetContent = React.forwardRef<

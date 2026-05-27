@@ -14,6 +14,10 @@
   --olive: 61 74 42; /* #3D4A2A */
   --border: 220 214 203;
   --ring: 201 168 117;
+
+  /* Soft, tactile design tokens */
+  --paper: 248 245 238;
+  --paper-ink: 44 44 40;
 }
 
 html {
@@ -29,6 +33,32 @@ body {
   @apply font-sans antialiased;
   background: rgb(var(--background));
   color: rgb(var(--foreground));
+}
+
+@layer utilities {
+  .paper-bg {
+    background-image:
+      radial-gradient(circle at 18% 14%, rgb(var(--accent) / 0.08), transparent 38%),
+      radial-gradient(circle at 78% 28%, rgb(var(--olive) / 0.06), transparent 44%),
+      linear-gradient(0deg, rgb(0 0 0 / 0.018), rgb(0 0 0 / 0.018)),
+      radial-gradient(circle at 0 0, rgb(0 0 0 / 0.025), transparent 42%),
+      radial-gradient(circle at 100% 100%, rgb(0 0 0 / 0.02), transparent 46%);
+    background-size: auto, auto, auto, 18px 18px, 22px 22px;
+    background-blend-mode: multiply;
+  }
+
+  .cutline {
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgb(var(--border)) 0 10px,
+      transparent 10px 18px
+    );
+    height: 1px;
+  }
+
+  .stamp {
+    @apply inline-flex items-center gap-2 rounded-full bg-card px-3 py-1 text-[11px] uppercase tracking-smallcaps ring-1 ring-border/70;
+  }
 }
 
 .prose p {

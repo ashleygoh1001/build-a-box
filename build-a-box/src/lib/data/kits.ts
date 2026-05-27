@@ -20,6 +20,10 @@ export type KitProduct = {
   requirements: KitRequirementOption[];
   shortDescription: string;
   imageCaption: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  /** Tailwind aspect ratio value, e.g. "1024/559" */
+  imageAspect?: string;
 };
 
 export const kits: KitProduct[] = [
@@ -36,6 +40,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "A quiet surface for a book and a glass of water.",
     imageCaption: "[Kit: Cardboard side table beside linen sofa]",
+    imageSrc: "/kit-side-table.png",
+    imageAlt: "Side table kit beside a sofa in warm light",
+    imageAspect: "1024/559",
   },
   {
     id: "kit-floor-lamp",
@@ -49,6 +56,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "Light, softened. A paper-like glow from reused board.",
     imageCaption: "[Kit: Cardboard floor lamp in corner of calm room]",
+    imageSrc: "/kit-floor-lamp.png",
+    imageAlt: "Floor lamp kit in a calm room",
+    imageAspect: "1024/559",
   },
   {
     id: "kit-bookends",
@@ -59,6 +69,9 @@ export const kits: KitProduct[] = [
     requirements: [{ label: "1 × Small", boxes: [{ size: "Small", quantity: 1 }] }],
     shortDescription: "Two forms, one material. Holds weight with ease.",
     imageCaption: "[Kit: Minimal cardboard bookends on shelf]",
+    imageSrc: "/kit-bookends.png",
+    imageAlt: "Bookend kit holding books on a shelf",
+    imageAspect: "1024/572",
   },
   {
     id: "kit-planter-stand",
@@ -72,6 +85,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "A small lift for green things and morning light.",
     imageCaption: "[Kit: Cardboard planter stand near window]",
+    imageSrc: "/kit-planter-stand.png",
+    imageAlt: "Planter stand kit styled with houseplants",
+    imageAspect: "1024/559",
   },
 
   // Statement kits (5–12 boxes)
@@ -87,6 +103,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "Surprisingly structural. Designed to be lived with.",
     imageCaption: "[Hero: Cardboard lounge chair in sunlit room]",
+    imageSrc: "/kit-lounge-chair.png",
+    imageAlt: "Lounge chair kit in a sunlit apartment",
+    imageAspect: "1024/559",
   },
   {
     id: "kit-bookshelf",
@@ -101,6 +120,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "A grid of calm. Slots, folds, and quiet strength.",
     imageCaption: "[Kit: Cardboard bookshelf with ceramics and books]",
+    imageSrc: "/kit-bookshelf.png",
+    imageAlt: "Bookshelf kit styled with books and ceramics",
+    imageAspect: "1024/559",
   },
   {
     id: "kit-bench",
@@ -114,6 +136,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "For entryways, the end of beds, and pauses.",
     imageCaption: "[Kit: Cardboard bench with folded blanket]",
+    imageSrc: "/kit-bench.png",
+    imageAlt: "Bench kit with a folded blanket in warm light",
+    imageAspect: "1024/559",
   },
   {
     id: "kit-desk",
@@ -127,6 +152,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "A work surface that begins with what you already have.",
     imageCaption: "[Kit: Cardboard desk with notebook and lamp]",
+    imageSrc: "/kit-desk.png",
+    imageAlt: "Desk kit with notebook and lamp in warm light",
+    imageAspect: "1024/559",
   },
 
   // Decor kits
@@ -142,6 +170,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "Layered petals of board. Shadow, warmth, presence.",
     imageCaption: "[Kit: Cardboard pendant chandelier over dining table]",
+    imageSrc: "/kit-pendant-chandelier.png",
+    imageAlt: "Pendant chandelier kit over a dining table",
+    imageAspect: "1024/559",
   },
   {
     id: "kit-wall-sculpture",
@@ -156,6 +187,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "A relief of repeating forms—soft, tactile geometry.",
     imageCaption: "[Kit: Cardboard wall sculpture in hallway]",
+    imageSrc: "/kit-wall-sculpture.png",
+    imageAlt: "Wall sculpture kit installed in a hallway",
+    imageAspect: "1024/559",
   },
   {
     id: "kit-divider",
@@ -169,6 +203,9 @@ export const kits: KitProduct[] = [
     ],
     shortDescription: "A movable boundary. Light passes through; life continues.",
     imageCaption: "[Kit: Cardboard room divider in studio apartment]",
+    imageSrc: "/kit-room-divider.png",
+    imageAlt: "Room divider kit dividing a studio space",
+    imageAspect: "1024/559",
   },
 ];
 

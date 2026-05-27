@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 import {
   getKitBySlug,
@@ -10,6 +11,8 @@ import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
+const getAspectRatio = (aspect?: string) => (aspect ? aspect.replace("/", " / ") : "4 / 3");
+
 export default function KitDetailPage({ params }: { params: { slug: string } }) {
   const kit = getKitBySlug(params.slug);
   if (!kit) return notFound();
@@ -20,10 +23,29 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
     <div className="mx-auto max-w-6xl px-6 pt-14 md:pt-20">
       <div className="grid gap-10 md:grid-cols-12 md:items-start">
         <div className="md:col-span-7">
-          <div className="aspect-[4/3] rounded-3xl bg-muted p-6 ring-1 ring-border/60">
-            <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-              {kit.imageCaption}
-            </p>
+          <div className="rounded-3xl bg-muted p-6 ring-1 ring-border/60">
+            {kit.imageSrc ? (
+              <div
+                style={{ aspectRatio: getAspectRatio(kit.imageAspect) }}
+                className="w-full overflow-hidden rounded-2xl bg-background/70 ring-1 ring-border/60"
+              >
+                <Image
+                  src={kit.imageSrc}
+                  alt={kit.imageAlt ?? ""}
+                  width={1600}
+                  height={900}
+                  priority
+                  sizes="(min-width: 768px) 58vw, 100vw"
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            ) : (
+              <div className="aspect-[4/3] w-full rounded-2xl bg-background/70 p-4 ring-1 ring-border/60">
+                <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                  {kit.imageCaption}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="mt-10 space-y-10">
@@ -151,10 +173,28 @@ export default function KitDetailPage({ params }: { params: { slug: string } }) 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {related.map((k) => (
             <div key={k.id} className="rounded-3xl bg-card ring-1 ring-border/60">
-              <div className="aspect-[4/3] rounded-t-3xl bg-muted p-5">
-                <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-                  {k.imageCaption}
-                </p>
+              <div className="rounded-t-3xl bg-muted p-5">
+                {k.imageSrc ? (
+                  <div
+                    style={{ aspectRatio: getAspectRatio(k.imageAspect) }}
+                    className="w-full overflow-hidden rounded-2xl bg-background/70 ring-1 ring-border/60"
+                  >
+                    <Image
+                      src={k.imageSrc}
+                      alt={k.imageAlt ?? ""}
+                      width={1200}
+                      height={700}
+                      sizes="(min-width: 768px) 25vw, 100vw"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-[4/3] w-full rounded-2xl bg-background/70 p-4 ring-1 ring-border/60">
+                    <p className="text-xs uppercase tracking-smallcaps text-mutedForeground">
+                      {k.imageCaption}
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="p-6">
                 <p className="font-serif text-lg">{k.name}</p>

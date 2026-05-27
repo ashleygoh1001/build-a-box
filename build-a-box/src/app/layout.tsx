@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${fontSerif.variable} ${fontSans.variable}`}>
-      <body className="min-h-screen">
+      <body className="min-h-screen paper-bg">
         <CartProvider>
           <SiteNav />
           <main>{children}</main>
