@@ -31,67 +31,68 @@ export default function Home() {
 
   return (
     <div>
-      {/* Landing */}
-      <section id="about" className="mx-auto max-w-7xl scroll-mt-28 px-6 pt-16 md:pt-24">
-        <div className="grid gap-12 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-6">
-            <p className="text-xs uppercase tracking-smallcaps text-olive/80">
+      {/* Landing — full-screen video */}
+      <section
+        id="about"
+        className="relative min-h-[100svh] scroll-mt-28 overflow-hidden"
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover opacity-75"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div
+          className="absolute inset-0 bg-background/30"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/25"
+          aria-hidden
+        />
+
+        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col items-center justify-center px-6 py-28 text-center md:py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto max-w-3xl"
+          >
+            <p className="text-xs uppercase tracking-smallcaps text-olive/90">
               Moving boxes · Build kits · A second life
             </p>
-            <h1 className="mt-5 font-serif text-5xl leading-[1.02] tracking-tight md:text-[5.75rem]">
-              Move in. <span className="italic text-olive">Build up.</span>
+            <h1 className="mt-5 font-display text-5xl font-medium leading-[0.95] tracking-[-0.04em] md:text-[6.5rem]">
+              Move in.{" "}
+              <span className="font-serif italic text-olive">Build up.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-mutedForeground">
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-foreground/85">
               Build‑A‑Box makes moving boxes that become the furniture in your new home.
               Move once. Build for years.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-2 text-mutedForeground">
+            <div className="mt-7 flex flex-wrap justify-center gap-2 text-mutedForeground">
               <span className="stamp">recyclable</span>
               <span className="stamp">low waste</span>
               <span className="stamp">made to keep</span>
             </div>
 
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button asChild>
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
+              <Button asChild data-cursor="hover">
                 <Link href="/boxes">Shop moving boxes</Link>
               </Button>
-              <Button variant="outline" asChild>
+              <Button variant="outline" asChild data-cursor="hover">
                 <Link href="/kits">Explore build kits</Link>
               </Button>
-              <Button variant="subtle" asChild>
+              <Button variant="subtle" asChild data-cursor="hover">
                 <Link href="/story">Read the story</Link>
               </Button>
             </div>
-          </div>
-
-          <div className="md:col-span-6">
-            <div className="rounded-3xl bg-muted p-6 ring-1 ring-border/60">
-              <div className="mb-4 flex items-center justify-between">
-                <span className="stamp">featured kit</span>
-                <span className="text-xs uppercase tracking-smallcaps text-mutedForeground">
-                  lounge chair
-                </span>
-              </div>
-              <div className="aspect-[1024/559] w-full overflow-hidden rounded-2xl bg-background/70 ring-1 ring-border/60">
-                <Image
-                  src="/kit-lounge-chair.png"
-                  alt="Lounge chair kit in a sunlit apartment"
-                  priority
-                  width={1400}
-                  height={900}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="h-full w-full object-contain"
-                />
-              </div>
-              <div className="mt-4 flex items-center justify-between gap-6 text-sm text-mutedForeground">
-                <span>8–10 boxes</span>
-                <Link href="/kits/lounge-chair" className="link-accent">
-                  View kit →
-                </Link>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
