@@ -43,12 +43,12 @@ export default function Home() {
           playsInline
           preload="auto"
           aria-hidden
-          className="absolute inset-0 h-full w-full object-cover opacity-75"
+          className="absolute inset-0 h-full w-full object-cover opacity-100"
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         <div
-          className="absolute inset-0 bg-background/30"
+          className="absolute inset-0 bg-background/20"
           aria-hidden
         />
         <div
