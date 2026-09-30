@@ -21,12 +21,21 @@ This is a **showcase site**, not a functional storefront:
 ## Run locally
 
 ```bash
-cd build-a-box
 npm install
 npm run dev
 ```
 
 Open `http://localhost:3000`.
+
+## Deploy on Vercel
+
+The Next.js app lives in this directory (`build-a-box/`), not the repository root.
+
+1. In the Vercel project, open **Settings → Build and Deployment → Root Directory**.
+2. Set Root Directory to **`build-a-box`** and save.
+3. Redeploy.
+
+The repo root `vercel.json` uses `npm --prefix build-a-box` so installs still work if Root Directory is not set yet, but **Root Directory `build-a-box` is required** for Vercel’s Next.js integration (serverless routes, etc.).
 
 ## Routes
 
